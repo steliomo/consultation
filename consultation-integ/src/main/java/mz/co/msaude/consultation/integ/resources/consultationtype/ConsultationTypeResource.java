@@ -5,12 +5,8 @@ package mz.co.msaude.consultation.integ.resources.consultationtype;
 
 import static mz.co.msaude.consultation.integ.resources.consultationtype.ConsultationTypeResource.NAME;
 
-import java.util.Arrays;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -22,6 +18,7 @@ import org.springframework.stereotype.Service;
 import mz.co.msaude.boot.frameworks.exception.BusinessException;
 import mz.co.msaude.consultation.core.consultationtype.model.ConsultationType;
 import mz.co.msaude.consultation.core.consultationtype.service.ConsultationTypeService;
+import mz.co.msaude.consultation.integ.resources.AbstractResource;
 
 /**
  * @author Stélio Moiane
@@ -29,7 +26,7 @@ import mz.co.msaude.consultation.core.consultationtype.service.ConsultationTypeS
  */
 @Path("consultation-types")
 @Service(NAME)
-public class ConsultationTypeResource {
+public class ConsultationTypeResource extends AbstractResource {
 
 	public static final String NAME = "mz.co.msaude.consultation.integ.resources.consultationtype.ConsultationTypeResource";
 
@@ -41,18 +38,9 @@ public class ConsultationTypeResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createConsultationType(final ConsultationTypeBean consultationTypeBean) throws BusinessException {
 
-		final ConsultationType consultationType = this.consultationTypeService
-		        .createConsultationType(consultationTypeBean.getContext(), consultationTypeBean.getConsultationType());
+		final ConsultationType consultationType = this.consultationTypeService.createConsultationType(this.getContext(),
+		        consultationTypeBean.getConsultationType());
 
 		return Response.ok(consultationType).build();
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<ConsultationType> getConsultationTypes() {
-
-		final ConsultationType consultationType = new ConsultationType();
-
-		return Arrays.asList(consultationType);
 	}
 }
