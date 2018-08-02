@@ -36,10 +36,9 @@ public class ConsultationTypeResource extends AbstractResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createConsultationType(final ConsultationTypeBean consultationTypeBean) throws BusinessException {
+	public Response createConsultationType(final ConsultationType consultationType) throws BusinessException {
 
-		final ConsultationType consultationType = this.consultationTypeService.createConsultationType(this.getContext(),
-		        consultationTypeBean.getConsultationType());
+		this.consultationTypeService.createConsultationType(this.getContext(), consultationType);
 
 		return Response.ok(consultationType).build();
 	}
