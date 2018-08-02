@@ -36,10 +36,9 @@ public class HealthFacilityResource extends AbstractResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response createHealthFacility(final HealthFacilityBean healthFacilityBean) throws BusinessException {
+	public Response createHealthFacility(final HealthFacility healthFacility) throws BusinessException {
 
-		final HealthFacility healthFacility = this.healthFacilityService.createHealthFacility(this.getContext(),
-		        healthFacilityBean.getHealthFacility());
+		this.healthFacilityService.createHealthFacility(this.getContext(), healthFacility);
 
 		return Response.ok(healthFacility).build();
 	}
