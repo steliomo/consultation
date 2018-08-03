@@ -3,15 +3,22 @@
  */
 package mz.co.msaude.consultation.core.doctor.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
+import mz.co.msaude.consultation.core.consultationtype.model.ConsultationType;
 
 /**
  * @author Stélio Moiane
@@ -36,6 +43,10 @@ public class Doctor extends GenericEntity {
 	@Column(name = "GENDER", nullable = false, length = 15)
 	private Gender gender;
 
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "DOCTOR_CONSULTATION_TYPE", joinColumns = @JoinColumn(name = "DOCTOR_ID"), inverseJoinColumns = @JoinColumn(name = "CONSULTATION_TYPE_ID"))
+	private Set<ConsultationType> consultationTypes;
+
 	public String getName() {
 		return this.name;
 	}
@@ -58,5 +69,9 @@ public class Doctor extends GenericEntity {
 
 	public void setGender(final Gender gender) {
 		this.gender = gender;
+	}
+
+	public Set<ConsultationType> getConsultationTypes() {
+		return this.consultationTypes;
 	}
 }
