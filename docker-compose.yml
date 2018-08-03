@@ -1,0 +1,38 @@
+version: '3.2'
+services:
+    consultation-integ:
+        build:
+            context: .
+            dockerfile: ./integ/Dockerfile
+            args:
+               jar_file: consultation-integ/target/consultation-integ-0.0.1-SNAPSHOT.jar 
+        container_name: consultation-integ
+        ports:
+            - "8080:8080"
+        networks: 
+            - network
+        depends_on: 
+            - "consultationdb"
+        volumes: 
+          - type: bind
+            source: /opt/consultation/data
+            target: /opt/consultation/data
+
+    consultationdb:
+        build: 
+            context: ./database
+        container_name: consultationdb
+        ports: 
+            - "3306:3306"
+        networks: 
+            - network
+        volumes:
+            - type: volume
+              source: dbdata
+              target: /opt/consultation/data/system/mysql
+networks: 
+  network:
+    driver: bridge
+
+volumes:
+  dbdata:
