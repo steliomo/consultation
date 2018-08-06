@@ -17,6 +17,7 @@ services:
           - type: bind
             source: /opt/consultation/data
             target: /opt/consultation/data
+        restart: unless-stopped
 
     consultationdb:
         build: 
@@ -30,6 +31,7 @@ services:
             - type: volume
               source: dbdata
               target: /opt/consultation/data/system/mysql
+        restart: unless-stopped
 networks: 
   network:
     driver: bridge
