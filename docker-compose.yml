@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: ./integ/Dockerfile
             args:
-               jar_file: consultation-integ/target/consultation-integ-0.0.1-SNAPSHOT.jar 
+               jar_file: consultation-integ/target/*.jar 
         container_name: consultation-integ
         ports:
             - "8080:8080"
