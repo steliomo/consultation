@@ -5,34 +5,39 @@ services:
             context: .
             dockerfile: ./integ/Dockerfile
             args:
-               jar_file: consultation-integ/target/consultation-integ-0.0.1-SNAPSHOT.jar 
+               jar_file: consultation-integ/target/*.jar 
         container_name: consultation-integ
         ports:
-            - "8080:8080"
+            - "8082:8080"
+            - "8002:8000"
         networks: 
             - network
+            - account-manager_network
         depends_on: 
             - "consultationdb"
         volumes: 
           - type: bind
             source: /opt/consultation/data
             target: /opt/consultation/data
-
+        restart: unless-stopped
     consultationdb:
         build: 
             context: ./database
         container_name: consultationdb
         ports: 
-            - "3306:3306"
+            - "3309:3306"
         networks: 
             - network
         volumes:
             - type: volume
               source: dbdata
-              target: /opt/consultation/data/system/mysql
+              target: /opt/consultation/data
+        restart: unless-stopped
 networks: 
   network:
     driver: bridge
+  account-manager_network:
+    external: true
 
 volumes:
   dbdata:

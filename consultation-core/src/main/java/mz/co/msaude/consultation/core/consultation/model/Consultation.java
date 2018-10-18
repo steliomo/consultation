@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -20,6 +22,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
 import mz.co.msaude.boot.frameworks.util.LocalDateAdapter;
 import mz.co.msaude.boot.frameworks.util.LocalTimeAdapter;
+import mz.co.msaude.consultation.core.consultation.dao.ConsultationDAO;
 import mz.co.msaude.consultation.core.consultationtype.model.ConsultationType;
 import mz.co.msaude.consultation.core.doctor.model.Doctor;
 import mz.co.msaude.consultation.core.healthfacility.model.HealthFacility;
@@ -28,6 +31,8 @@ import mz.co.msaude.consultation.core.healthfacility.model.HealthFacility;
  * @author Stélio Moiane
  *
  */
+@NamedQueries({
+        @NamedQuery(name = ConsultationDAO.QUERY_NAME.fetchByPatientAndStatus, query = ConsultationDAO.QUERY.fetchByPatientAndStatus) })
 @Entity
 @Table(name = "CONSULTATIONS")
 public class Consultation extends GenericEntity {

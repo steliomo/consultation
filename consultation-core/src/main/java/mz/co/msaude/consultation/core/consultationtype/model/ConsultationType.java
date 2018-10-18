@@ -5,15 +5,19 @@ package mz.co.msaude.consultation.core.consultationtype.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
+import mz.co.msaude.consultation.core.consultationtype.dao.ConsultationTypeDAO;
 
 /**
  * @author Stélio Moiane
  *
  */
+@NamedQueries({ @NamedQuery(name = ConsultationTypeDAO.QUERY_NAME.findAll, query = ConsultationTypeDAO.QUERY.findAll) })
 @Entity
 @Table(name = "CONSULTATION_TYPES")
 public class ConsultationType extends GenericEntity {

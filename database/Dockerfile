@@ -6,7 +6,7 @@ ENV MYSQL_ROOT_PASSWORD=root
 ENV MYSQL_DATABASE=consultation
 ENV MYSQL_USER=consultation
 ENV MYSQL_PASSWORD=consultation
-ENV MYSQL_DATA_DIRECTORY=/opt/data/system/mysql
+ENV MYSQL_DATA_DIRECTORY=/opt/consultation/data/system/mysql
 
 ADD mysql.cnf /root/.my.cnf
 ADD localtime /etc/localtime

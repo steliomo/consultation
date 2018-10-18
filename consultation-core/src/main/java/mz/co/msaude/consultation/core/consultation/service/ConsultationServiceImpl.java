@@ -14,6 +14,7 @@ import mz.co.msaude.boot.frameworks.model.UserContext;
 import mz.co.msaude.boot.frameworks.service.AbstractService;
 import mz.co.msaude.consultation.core.consultation.dao.ConsultationDAO;
 import mz.co.msaude.consultation.core.consultation.model.Consultation;
+import mz.co.msaude.consultation.core.consultation.model.ConsultationStatus;
 
 /**
  * @author Stélio Moiane
@@ -30,6 +31,8 @@ public class ConsultationServiceImpl extends AbstractService implements Consulta
 	@Override
 	public Consultation createConsultation(final UserContext userContext, final Consultation consultation)
 	        throws BusinessException {
+
+		consultation.setConsultationStatus(ConsultationStatus.PENDING);
 		return this.consultationDAO.create(userContext, consultation);
 	}
 }
