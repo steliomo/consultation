@@ -20,7 +20,6 @@ services:
             source: /opt/consultation/data
             target: /opt/consultation/data
         restart: unless-stopped
-
     consultationdb:
         build: 
             context: ./database
