@@ -5,16 +5,20 @@ package mz.co.msaude.consultation.core.healthfacility.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
+import mz.co.msaude.consultation.core.healthfacility.dao.HealthFacilityDAO;
 
 /**
  * @author Stélio Moiane
  *
  */
+@NamedQueries(@NamedQuery(name = HealthFacilityDAO.QUERY_NAME.findByLocalityUuid, query = HealthFacilityDAO.QUERY.findByLocalityUuid))
 @Entity
 @Table(name = "HEALTH_FACILITIES")
 public class HealthFacility extends GenericEntity {

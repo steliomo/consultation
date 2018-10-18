@@ -1,7 +1,7 @@
 /**
  *
  */
-package mz.co.msaude.consultation.core.healthfacility;
+package mz.co.msaude.consultation.core.healthfacility.integ;
 
 import javax.inject.Inject;
 
