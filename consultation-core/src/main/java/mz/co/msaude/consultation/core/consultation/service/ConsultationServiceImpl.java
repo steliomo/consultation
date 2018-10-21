@@ -35,4 +35,11 @@ public class ConsultationServiceImpl extends AbstractService implements Consulta
 		consultation.setConsultationStatus(ConsultationStatus.PENDING);
 		return this.consultationDAO.create(userContext, consultation);
 	}
+
+	@Override
+	public Consultation updateConsultation(final UserContext userContext, final Consultation consultation)
+	        throws BusinessException {
+
+		return this.consultationDAO.update(userContext, consultation);
+	}
 }

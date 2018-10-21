@@ -60,4 +60,13 @@ public class ConsultationServiceTest extends AbstractServiceTest {
 		TestUtil.assertCreation(this.consultation);
 		assertEquals(ConsultationStatus.PENDING, this.consultation.getConsultationStatus());
 	}
+
+	@Test
+	public void shouldCancelConsultation() throws BusinessException {
+		this.consultationService.createConsultation(this.getUserContext(), this.consultation);
+		this.consultation.setConsultationStatus(ConsultationStatus.CANCELED);
+		this.consultationService.updateConsultation(this.getUserContext(), this.consultation);
+
+		assertEquals(ConsultationStatus.CANCELED, this.consultation.getConsultationStatus());
+	}
 }

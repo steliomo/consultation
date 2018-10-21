@@ -15,6 +15,9 @@ import mz.co.msaude.consultation.core.consultation.model.ConsultationStatus;
  *
  */
 public interface ConsultationQueryService {
+
 	List<Consultation> fetchConsultationsByUserAndStatus(final UserContext context,
 	        final ConsultationStatus consultationStatus) throws BusinessException;
+
+	Consultation findConsultationById(final Long id) throws BusinessException;
 }

@@ -15,4 +15,7 @@ public interface ConsultationService {
 
 	Consultation createConsultation(final UserContext userContext, final Consultation consultation)
 	        throws BusinessException;
+
+	Consultation updateConsultation(final UserContext userContext, final Consultation consultation)
+	        throws BusinessException;
 }

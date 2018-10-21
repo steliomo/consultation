@@ -36,4 +36,8 @@ public class ConsultationQueryServiceImpl implements ConsultationQueryService {
 		return this.consultationDAO.fetchByUserAndStatus(context, consultationStatus, EntityStatus.ACTIVE);
 	}
 
+	@Override
+	public Consultation findConsultationById(final Long id) throws BusinessException {
+		return this.consultationDAO.findById(id);
+	}
 }
