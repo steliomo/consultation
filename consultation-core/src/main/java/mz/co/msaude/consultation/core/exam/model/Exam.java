@@ -1,7 +1,7 @@
 /**
  *
  */
-package mz.co.msaude.consultation.core.consultation.model;
+package mz.co.msaude.consultation.core.exam.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,8 +23,7 @@ import mz.co.msaude.boot.frameworks.exception.BusinessException;
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
 import mz.co.msaude.boot.frameworks.util.LocalDateAdapter;
 import mz.co.msaude.boot.frameworks.util.LocalTimeAdapter;
-import mz.co.msaude.consultation.core.consultation.dao.ConsultationDAO;
-import mz.co.msaude.consultation.core.doctor.model.Doctor;
+import mz.co.msaude.consultation.core.exam.dao.ExamDAO;
 import mz.co.msaude.consultation.core.healthfacility.model.HealthFacility;
 import mz.co.msaude.consultation.core.medicalservicetype.model.MedicalServiceType;
 import mz.co.msaude.consultation.core.medicalservicetype.model.ServiceType;
@@ -34,10 +33,10 @@ import mz.co.msaude.consultation.core.medicalservicetype.model.ServiceType;
  *
  */
 @NamedQueries({
-        @NamedQuery(name = ConsultationDAO.QUERY_NAME.fetchByPatientAndStatus, query = ConsultationDAO.QUERY.fetchByPatientAndStatus) })
+        @NamedQuery(name = ExamDAO.QUERY_NAME.fetchByUserAndStatus, query = ExamDAO.QUERY.fetchByUserAndStatus) })
 @Entity
-@Table(name = "CONSULTATIONS")
-public class Consultation extends GenericEntity {
+@Table(name = "EXAMS")
+public class Exam extends GenericEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -52,23 +51,18 @@ public class Consultation extends GenericEntity {
 	private HealthFacility healthFacility;
 
 	@NotNull
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOCTOR_ID", nullable = false)
-	private Doctor doctor;
-
-	@NotNull
 	@XmlJavaTypeAdapter(LocalDateAdapter.class)
-	@Column(name = "CONSULTATION_DATE", nullable = false)
-	private LocalDate consultationDate;
+	@Column(name = "EXAM_DATE", nullable = false)
+	private LocalDate examDate;
 
 	@XmlJavaTypeAdapter(LocalTimeAdapter.class)
-	@Column(name = "CONSULTATION_TIME")
-	private LocalTime consultationTime;
+	@Column(name = "EXAM_TIME")
+	private LocalTime examTime;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
-	@Column(name = "CONSULTATION_STATUS", nullable = false)
-	private ConsultationStatus consultationStatus;
+	@Column(name = "EXAM_STATUS", nullable = false, length = 30)
+	private ExamStatus examStatus;
 
 	@NotNull
 	@Column(name = "PATIENT_UUID", nullable = false, length = 50)
@@ -80,8 +74,8 @@ public class Consultation extends GenericEntity {
 
 	public void setMedicalServiceType(final MedicalServiceType medicalServiceType) throws BusinessException {
 
-		if (!ServiceType.CONSULTATION.equals(medicalServiceType.getServiceType())) {
-			throw new BusinessException("The consultation type is invalid");
+		if (!ServiceType.EXAM.equals(medicalServiceType.getServiceType())) {
+			throw new BusinessException("The service type is invalid for the exam....");
 		}
 
 		this.medicalServiceType = medicalServiceType;
@@ -95,36 +89,28 @@ public class Consultation extends GenericEntity {
 		this.healthFacility = healthFacility;
 	}
 
-	public Doctor getDoctor() {
-		return this.doctor;
+	public LocalDate getExamDate() {
+		return this.examDate;
 	}
 
-	public void setDoctor(final Doctor doctor) {
-		this.doctor = doctor;
+	public void setExamDate(final LocalDate examDate) {
+		this.examDate = examDate;
 	}
 
-	public LocalDate getConsultationDate() {
-		return this.consultationDate;
+	public LocalTime getExamTime() {
+		return this.examTime;
 	}
 
-	public void setConsultationDate(final LocalDate consultationDate) {
-		this.consultationDate = consultationDate;
+	public void setExamTime(final LocalTime examTime) {
+		this.examTime = examTime;
 	}
 
-	public LocalTime getConsultationTime() {
-		return this.consultationTime;
+	public ExamStatus getExamStatus() {
+		return this.examStatus;
 	}
 
-	public void setConsultationTime(final LocalTime consultationTime) {
-		this.consultationTime = consultationTime;
-	}
-
-	public ConsultationStatus getConsultationStatus() {
-		return this.consultationStatus;
-	}
-
-	public void setConsultationStatus(final ConsultationStatus consultationStatus) {
-		this.consultationStatus = consultationStatus;
+	public void setExamStatus(final ExamStatus examStatus) {
+		this.examStatus = examStatus;
 	}
 
 	public String getPatient() {

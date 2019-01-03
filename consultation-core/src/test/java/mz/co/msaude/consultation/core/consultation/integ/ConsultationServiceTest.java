@@ -17,10 +17,10 @@ import mz.co.msaude.consultation.core.config.AbstractServiceTest;
 import mz.co.msaude.consultation.core.consultation.model.Consultation;
 import mz.co.msaude.consultation.core.consultation.model.ConsultationStatus;
 import mz.co.msaude.consultation.core.consultation.service.ConsultationService;
-import mz.co.msaude.consultation.core.consultationtype.service.ConsultationTypeService;
 import mz.co.msaude.consultation.core.doctor.service.DoctorService;
 import mz.co.msaude.consultation.core.fixturefactory.ConsultationTemplate;
 import mz.co.msaude.consultation.core.healthfacility.service.HealthFacilityService;
+import mz.co.msaude.consultation.core.medicalservicetype.service.MedicalServiceTypeService;
 
 /**
  * @author Stélio Moiane
@@ -32,7 +32,7 @@ public class ConsultationServiceTest extends AbstractServiceTest {
 	private ConsultationService consultationService;
 
 	@Inject
-	private ConsultationTypeService consultationTypeService;
+	private MedicalServiceTypeService consultationTypeService;
 
 	@Inject
 	private HealthFacilityService healthFacilityService;
@@ -46,8 +46,8 @@ public class ConsultationServiceTest extends AbstractServiceTest {
 	public void setup() throws BusinessException {
 		this.consultation = EntityFactory.gimme(Consultation.class, ConsultationTemplate.VALID);
 
-		this.consultationTypeService.createConsultationType(this.getUserContext(),
-		        this.consultation.getConsultationType());
+		this.consultationTypeService.createMedicalServiceType(this.getUserContext(),
+		        this.consultation.getMedicalServiceType());
 		this.healthFacilityService.createHealthFacility(this.getUserContext(), this.consultation.getHealthFacility());
 		this.doctorService.createDoctor(this.getUserContext(), this.consultation.getDoctor());
 	}

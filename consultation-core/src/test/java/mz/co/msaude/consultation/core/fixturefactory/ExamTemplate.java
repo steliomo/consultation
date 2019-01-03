@@ -10,9 +10,8 @@ import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 import mz.co.msaude.boot.frameworks.util.UuidFactory;
-import mz.co.msaude.consultation.core.consultation.model.Consultation;
-import mz.co.msaude.consultation.core.consultation.model.ConsultationStatus;
-import mz.co.msaude.consultation.core.doctor.model.Doctor;
+import mz.co.msaude.consultation.core.exam.model.Exam;
+import mz.co.msaude.consultation.core.exam.model.ExamStatus;
 import mz.co.msaude.consultation.core.healthfacility.model.HealthFacility;
 import mz.co.msaude.consultation.core.medicalservicetype.model.MedicalServiceType;
 
@@ -20,22 +19,21 @@ import mz.co.msaude.consultation.core.medicalservicetype.model.MedicalServiceTyp
  * @author Stélio Moiane
  *
  */
-public class ConsultationTemplate implements TemplateLoader {
+public class ExamTemplate implements TemplateLoader {
 
 	public static final String VALID = "VALID";
 
 	@Override
 	public void load() {
-		Fixture.of(Consultation.class).addTemplate("VALID", new Rule() {
+
+		Fixture.of(Exam.class).addTemplate(VALID, new Rule() {
 			{
-				this.add("medicalServiceType",
-				        this.one(MedicalServiceType.class, MedicalServiceTypeTemplate.CONSULTATION));
+				this.add("medicalServiceType", this.one(MedicalServiceType.class, MedicalServiceTypeTemplate.EXAM));
 				this.add("healthFacility", this.one(HealthFacility.class, HealthFacilityTemplate.VALID));
-				this.add("doctor", this.one(Doctor.class, DoctorTemplate.VALID));
-				this.add("consultationDate", LocalDate.now());
-				this.add("consultationTime", LocalTime.now());
+				this.add("examDate", LocalDate.now());
+				this.add("examTime", LocalTime.now());
 				this.add("patient", UuidFactory.generate());
-				this.add("consultationStatus", ConsultationStatus.PENDING);
+				this.add("examStatus", ExamStatus.PENDING);
 			}
 		});
 	}

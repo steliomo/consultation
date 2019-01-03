@@ -21,8 +21,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlTransient;
 
 import mz.co.msaude.boot.frameworks.model.GenericEntity;
-import mz.co.msaude.consultation.core.consultationtype.model.ConsultationType;
 import mz.co.msaude.consultation.core.doctor.dao.DoctorDAO;
+import mz.co.msaude.consultation.core.medicalservicetype.model.MedicalServiceType;
 
 /**
  * @author Stélio Moiane
@@ -50,8 +50,8 @@ public class Doctor extends GenericEntity {
 
 	@XmlTransient
 	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "DOCTOR_CONSULTATION_TYPE", joinColumns = @JoinColumn(name = "DOCTOR_ID"), inverseJoinColumns = @JoinColumn(name = "CONSULTATION_TYPE_ID"))
-	private Set<ConsultationType> consultationTypes;
+	@JoinTable(name = "DOCTOR_MEDICAL_SERVICE_TYPE", joinColumns = @JoinColumn(name = "DOCTOR_ID"), inverseJoinColumns = @JoinColumn(name = "MEDICAL_SERVICE_TYPE_ID"))
+	private Set<MedicalServiceType> medicalServiceTypes;
 
 	public String getName() {
 		return this.name;
@@ -77,7 +77,7 @@ public class Doctor extends GenericEntity {
 		this.gender = gender;
 	}
 
-	public Set<ConsultationType> getConsultationTypes() {
-		return this.consultationTypes;
+	public Set<MedicalServiceType> getMedicalServiceTypes() {
+		return this.medicalServiceTypes;
 	}
 }

@@ -20,14 +20,14 @@ public interface ConsultationDAO extends GenericDAO<Consultation, Long> {
 
 	class QUERY {
 		public static final String fetchByPatientAndStatus = "SELECT c FROM Consultation c "
-		        + "INNER JOIN FETCH c.consultationType INNER JOIN FETCH c.healthFacility "
+		        + "INNER JOIN FETCH c.medicalServiceType INNER JOIN FETCH c.healthFacility "
 		        + "INNER JOIN FETCH c.doctor "
 		        + "WHERE c.createdBy = :userUuid AND c.consultationStatus = :consultationStatus "
 		        + "AND c.entityStatus = :entityStatus ORDER BY c.consultationDate DESC";
 	}
 
 	class QUERY_NAME {
-		public static final String fetchByPatientAndStatus = "ConsultationType.fetchByPatientAndStatus";
+		public static final String fetchByPatientAndStatus = "Consultation.fetchByPatientAndStatus";
 	}
 
 	List<Consultation> fetchByUserAndStatus(final UserContext context, final ConsultationStatus consultationStatus,

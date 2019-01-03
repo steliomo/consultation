@@ -20,10 +20,10 @@ import mz.co.msaude.consultation.core.config.AbstractServiceTest;
 import mz.co.msaude.consultation.core.consultation.model.Consultation;
 import mz.co.msaude.consultation.core.consultation.service.ConsultationQueryService;
 import mz.co.msaude.consultation.core.consultation.service.ConsultationService;
-import mz.co.msaude.consultation.core.consultationtype.service.ConsultationTypeService;
 import mz.co.msaude.consultation.core.doctor.service.DoctorService;
 import mz.co.msaude.consultation.core.fixturefactory.ConsultationTemplate;
 import mz.co.msaude.consultation.core.healthfacility.service.HealthFacilityService;
+import mz.co.msaude.consultation.core.medicalservicetype.service.MedicalServiceTypeService;
 
 /**
  * @author Stélio Moiane
@@ -35,7 +35,7 @@ public class ConsultationQueryServiceTest extends AbstractServiceTest {
 	private ConsultationService consultationService;
 
 	@Inject
-	private ConsultationTypeService consultationTypeService;
+	private MedicalServiceTypeService consultationTypeService;
 
 	@Inject
 	private HealthFacilityService healthFacilityService;
@@ -56,7 +56,7 @@ public class ConsultationQueryServiceTest extends AbstractServiceTest {
 		this.consultation = EntityFactory.gimme(Consultation.class, ConsultationTemplate.VALID);
 
 		this.context = this.getUserContext();
-		this.consultationTypeService.createConsultationType(this.context, this.consultation.getConsultationType());
+		this.consultationTypeService.createMedicalServiceType(this.context, this.consultation.getMedicalServiceType());
 		this.healthFacilityService.createHealthFacility(this.context, this.consultation.getHealthFacility());
 		this.doctorService.createDoctor(this.context, this.consultation.getDoctor());
 
@@ -71,7 +71,7 @@ public class ConsultationQueryServiceTest extends AbstractServiceTest {
 		assertFalse(consultations.isEmpty());
 
 		consultations.forEach(consultation -> {
-			assertNotNull(consultation.getConsultationType());
+			assertNotNull(consultation.getMedicalServiceType());
 			assertNotNull(consultation.getHealthFacility());
 			assertNotNull(consultation.getDoctor());
 		});
